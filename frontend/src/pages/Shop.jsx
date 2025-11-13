@@ -16,21 +16,7 @@ export default function Shop() {
         <p>Welcome, {userName}!</p>
       </header>
 
-
-      <div className="product-grid">
-        {[
-          { id: 1, name: 'Wireless Headphones', price: '₹2,499' },
-          { id: 2, name: 'Smart Watch', price: '₹3,999' },
-          { id: 3, name: 'Gaming Mouse', price: '₹1,299' },
-        ].map((item) => (
-          <div key={item.id} className="product-card">
-            <div className="product-img"></div>
-            <h3>{item.name}</h3>
-            <p>{item.price}</p>
-            <button>Add to Cart</button>
-          </div>
-        ))}
-      </div>
+      
     </div>
   );
 }
