@@ -17,7 +17,7 @@ export default function Signup() {
     
 
     try {
-      const res = await fetch('http://localhost:5001/api/auth/signup', {
+      const res = await fetch('https://smartpick-backend.onrender.com/api/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
