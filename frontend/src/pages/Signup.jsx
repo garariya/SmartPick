@@ -31,7 +31,7 @@ export default function Signup() {
         localStorage.setItem('user', JSON.stringify(data.user));
         if (data.token) localStorage.setItem('token', data.token);
       
-        navigate('/shop', { state: { userName: data.user.name } });
+        navigate('/chat', { state: { userName: data.user.name } });
       }
        else {
         alert(data.message || 'Signup failed');
