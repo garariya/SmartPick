@@ -23,5 +23,8 @@ app.get("/", (req, res) => {
 app.get("/test", (req, res) => {
   res.json({ message: "Backend working fine!" });
 });
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+});
 
 export default app;
