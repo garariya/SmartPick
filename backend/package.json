@@ -19,8 +19,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "express": "^4.21.2",
-    "jsonwebtoken": "^9.0.2",
-    "react-scripts": "^0.0.0"
+    "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
     "dotenv-cli": "^11.0.0"
