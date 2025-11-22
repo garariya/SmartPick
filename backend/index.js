@@ -14,7 +14,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api', chatRoutes);
 
 app.get("/", (req,res)=> {
-  res.send("API is running...");
+  res.send("API is running...")
 })
 
 const PORT = process.env.PORT || 5001;
