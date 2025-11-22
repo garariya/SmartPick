@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const authMiddleware = (req, res, next) => {
+const authMiddleware = async(req, res, next) => {
 
   const authHeader = req.headers.authorization;
 
@@ -15,10 +15,10 @@ const authMiddleware = (req, res, next) => {
 
   try {
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded =await jwt.verify(token, process.env.JWT_SECRET);
 
 
-    req.user = decoded;
+    req.user =await decoded;
 
 
     next();

@@ -95,5 +95,22 @@ router.post('/login', async (req, res) => {
 });
 
 
+router.get('/me', authMiddleware,  async (req, res) => {
+  try {
+    const user = await prisma.user.findUnique({ where: { id: req.user.userId } });
+    if (!user) return res.status(404).json({ message: 'User not found' });
+
+    return res.json({ 
+      id: user.id,
+      name: user.name,
+      email: user.email
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
 
 export default router;
