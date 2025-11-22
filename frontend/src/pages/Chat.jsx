@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function Chat() {
-  const REACT_APP_API_URL = process.env.REACT_APP_API_URL; // e.g., http://localhost:5001/api/chat
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
   const [value, setValue] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
 
@@ -15,12 +15,13 @@ export default function Chat() {
       });
 
       const data = await response.json(); 
+      console.log(data)
 
 
-      setChatHistory([
+      setChatHistory(chatHistory=> [
         ...chatHistory,
-        { role: "user", content: value },      
-        { role: "model", content: data.reply } 
+        { role: "user", parts: [{text: value}]},      
+        { role: "model", parts: [{text: data.reply}] } 
       ]);
 
       setValue("");
@@ -50,7 +51,7 @@ export default function Chat() {
               key={index}
               className={chat.role === "user" ? "user-message" : "model-message"}
             >
-              <p>{chat.content}</p>
+              <p>{chat.role} : {chat.parts[0].text}</p>
             </div>
           ))}
         </div>
