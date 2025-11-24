@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Chat.css";
 
 export default function Chat() {
   const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
