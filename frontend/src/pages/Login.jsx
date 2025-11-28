@@ -27,7 +27,7 @@ export default function Login() {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user', JSON.stringify(data.user));
 
-        navigate('/chat', { state: { userName: data.user.name } });
+        navigate('/homepage', { state: { userName: data.user.name } });
       } else {
         alert(data.message || 'Login failed');
       }

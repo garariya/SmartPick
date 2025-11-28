@@ -32,31 +32,32 @@ export default function Chat() {
   };
 
   return (
-    <div>
-      <section className="search-section">
-        <h2>Ask AI</h2>
+    <div className="chat-wrapper">
+  
 
+      <div className="chat-history">
+        {chatHistory.map((chat, index) => (
+          <div
+            key={index}
+            className={chat.role === "user" ? "user-message" : "model-message"}
+          >
+            <p>{chat.role} : {chat.parts[0].text}</p>
+          </div>
+        ))}
+      </div>
+  
+
+      <div className="input-bar">
         <input
           placeholder="Ask anything about product?"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleGenerate()} // optional: send on Enter
+          onKeyDown={(e) => e.key === "Enter" && handleGenerate()}
         />
-
-        <button onClick={handleGenerate}>Generate</button>
-        
-
-        <div className="chat-history">
-          {chatHistory.map((chat, index) => (
-            <div
-              key={index}
-              className={chat.role === "user" ? "user-message" : "model-message"}
-            >
-              <p>{chat.role} : {chat.parts[0].text}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+  
+        <button onClick={handleGenerate}>Send</button>
+      </div>
     </div>
   );
+  
 }
