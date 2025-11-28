@@ -4,6 +4,7 @@ import "./Homepage.css";
 
 export default function Homepage() {
   const navigate = useNavigate();
+  const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
 
   const [smartphones, setSmartphones] = useState([]);
   const [laptops, setLaptops] = useState([]);
@@ -17,7 +18,7 @@ export default function Homepage() {
   // Fetch categories from backend
   const fetchData = async (category, setter) => {
     try {
-      const res = await fetch(`http://localhost:5001/api/category/${category}`);
+      const res = await fetch(`${REACT_APP_API_URL}/api/category/${category}`);
       const data = await res.json();
 
       setter(data.products || []); // save into state
