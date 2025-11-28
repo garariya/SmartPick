@@ -11,23 +11,18 @@ export default function Homepage() {
   const [tablets, setTablets] = useState([]);
   const [lighting, setLighting] = useState([]);
 
-  const goToChat = () => {
-    navigate("/chat");
-  };
+  const goToChat = () => navigate("/chat");
 
-  // Fetch categories from backend
   const fetchData = async (category, setter) => {
     try {
-      const res = await fetch(`${REACT_APP_API_URL}/api/category/${category}`);
+      const res = await fetch(`${REACT_APP_API_URL}/api/category/${category}?limit=100`);
       const data = await res.json();
-
-      setter(data.products || []); // save into state
+      setter(data.products || []);
     } catch (e) {
       console.error("Fetch error:", e);
     }
   };
 
-  // when page loads, fetch all categories
   useEffect(() => {
     fetchData("smartphones", setSmartphones);
     fetchData("laptops", setLaptops);
@@ -35,57 +30,35 @@ export default function Homepage() {
     fetchData("lighting", setLighting);
   }, []);
 
+  const renderCategory = (title, products) => (
+    <div className="category-section">
+      <div className="category-header">
+        <h2>{title}</h2>
+        <button className="see-all-btn">See All</button>
+      </div>
+      <div className="product-row">
+        {products.map((p) => (
+          <div key={p.id} className="product-card">
+            <img src={p.thumbnail} alt={p.title} />
+            <p>{p.title}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+
   return (
     <div className="homepage-container">
       <button className="ask-ai-btn" onClick={goToChat}>
         Ask AI
       </button>
 
-      <h1>Welcome to the SmartPick</h1>
+      <h1>Welcome to SmartPick</h1>
 
-      {/* smartphones section */}
-      <h2>Smartphones</h2>
-      <div className="product-row">
-        {smartphones.map((p) => (
-          <div key={p.id} className="product-card">
-            <img src={p.thumbnail} alt={p.title} />
-            <p>{p.title}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* laptops section */}
-      <h2>Laptops</h2>
-      <div className="product-row">
-        {laptops.map((p) => (
-          <div key={p.id} className="product-card">
-            <img src={p.thumbnail} alt={p.title} />
-            <p>{p.title}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* tablets section */}
-      <h2>Tablets</h2>
-      <div className="product-row">
-        {tablets.map((p) => (
-          <div key={p.id} className="product-card">
-            <img src={p.thumbnail} alt={p.title} />
-            <p>{p.title}</p>
-          </div>
-        ))}
-      </div>
-
-      {/* lighting section */}
-      <h2>Lighting</h2>
-      <div className="product-row">
-        {lighting.map((p) => (
-          <div key={p.id} className="product-card">
-            <img src={p.thumbnail} alt={p.title} />
-            <p>{p.title}</p>
-          </div>
-        ))}
-      </div>
+      {renderCategory("Smartphones", smartphones)}
+      {renderCategory("Laptops", laptops)}
+      {renderCategory("Tablets", tablets)}
+      {renderCategory("Lighting", lighting)}
     </div>
   );
 }
