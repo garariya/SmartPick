@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.js';
 import chatRoutes from './routes/chat.js';
+import homepage from './routes/category.js';
 dotenv.config();
 
 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api', chatRoutes);
+app.use('/api/category', homepage);
 
 app.get("/", (req,res)=> {
   res.send("API is running...")
