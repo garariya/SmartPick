@@ -6,7 +6,7 @@ router.get("/:id", async(req,res)=>{
 
   try {
     const apiRes = await fetch(`https://dummyjson.com/products/${id}`)
-    const data = apiRes.json()
+    const data = await apiRes.json()
     res.status(200).json(data)
   } catch(e) {
     res.status(500).json({ error: "Failed to fetch product" });

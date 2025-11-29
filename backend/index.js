@@ -19,7 +19,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api', chatRoutes);
 app.use('/api/category', homepage);
-app.use('api/product', productRoutes)
+app.use('/api/product', productRoutes)
 
 app.get("/", (req,res)=> {
   res.send("API is running...")
