@@ -3,6 +3,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Chat from "./pages/Chat";
 import Homepage from "./pages/Homepage";
+import CategoryPage from "./pages/CategoryPage"
+import ProductPage from "./pages/ProductPage"
 
 
 function App() {
@@ -13,6 +15,8 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/chat" element={<Chat />} /> 
         <Route path="/homepage" element={<Homepage/>}/>
+        <Route path="/product/:id" element={<ProductPage/>}/>
+        <Route path="/category/:category" element={<CategoryPage/>}/>
       </Routes>
     </BrowserRouter>
   );

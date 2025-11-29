@@ -11,8 +11,6 @@ export default function Homepage() {
   const [tablets, setTablets] = useState([]);
   const [lighting, setLighting] = useState([]);
 
-  const goToChat = () => navigate("/chat");
-
   const fetchData = async (category, setter) => {
     try {
       const res = await fetch(`${REACT_APP_API_URL}/api/category/${category}?limit=100`);
@@ -30,15 +28,26 @@ export default function Homepage() {
     fetchData("lighting", setLighting);
   }, []);
 
-  const renderCategory = (title, products) => (
+  const renderCategory = (title, category, products) => (
     <div className="category-section">
       <div className="category-header">
         <h2>{title}</h2>
-        <button className="see-all-btn">See All</button>
+
+        <button
+          className="see-all-btn"
+          onClick={() => navigate(`/category/${category}`)}
+        >
+          See All
+        </button>
       </div>
+
       <div className="product-row">
         {products.map((p) => (
-          <div key={p.id} className="product-card">
+          <div
+            key={p.id}
+            className="product-card"
+            onClick={() => navigate(`/product/${p.id}`)}
+          >
             <img src={p.thumbnail} alt={p.title} />
             <p>{p.title}</p>
           </div>
@@ -49,16 +58,12 @@ export default function Homepage() {
 
   return (
     <div className="homepage-container">
-      <button className="ask-ai-btn" onClick={goToChat}>
-        Ask AI
-      </button>
-
       <h1>Welcome to SmartPick</h1>
 
-      {renderCategory("Smartphones", smartphones)}
-      {renderCategory("Laptops", laptops)}
-      {renderCategory("Tablets", tablets)}
-      {renderCategory("Lighting", lighting)}
+      {renderCategory("Smartphones", "smartphones", smartphones)}
+      {renderCategory("Laptops", "laptops", laptops)}
+      {renderCategory("Tablets", "tablets", tablets)}
+      {renderCategory("Lighting", "lighting", lighting)}
     </div>
   );
 }
