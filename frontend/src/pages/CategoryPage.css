@@ -1,57 +1,61 @@
-:root{
-  --bg: #0f1620;
-  --panel: #12161c;
-  --accent: #7b61ff;
-  --muted: #c7d2da;
-}
-
-
-.category-page{
-  min-height:100vh;
-  padding:36px;
-  max-width:1200px;
-  margin:0 auto;
-  color: #eaf2ff;
-  background: transparent;
+.category-page {
+  min-height: 100vh;
+  padding: 36px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #e6e7ee;
+  color: #333;
   font-family: "Poppins", Inter, Arial, sans-serif;
 }
 
-.category-page h1{
-  font-size:26px;
-  text-align:center;
-  margin-bottom:18px;
-  color:#f0f6ff;
-  letter-spacing: .6px;
+.category-page h1 {
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
 }
 
-
-.category-grid{
-  display:grid;
+.category-grid {
+  display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap:20px;
+  gap: 20px;
+}
+
+.category-card {
+  background: #e6e7ee;
+  border-radius: 20px;
+  padding: 12px;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  box-shadow: 8px 8px 16px #b8b9be, -8px -8px 16px #ffffff;
+
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 
-.category-card{
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.14));
-  border-radius: 14px;
-  padding:12px;
-  text-align:center;
-  cursor:pointer;
-  transition: transform .18s ease, box-shadow .18s ease;
-  box-shadow: 8px 10px 24px rgba(0,0,0,0.6), -6px -6px 14px rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.02);
-}
-.category-card:hover{ transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.72), 0 0 26px rgba(123,97,255,0.06) }
-
-.category-card img{
-  width:100%;
-  height:160px;
-  object-fit:contain;
-  border-radius:10px;
-  padding:8px;
-  background: rgba(255,255,255,0.01);
-  margin-bottom:10px;
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: inset 6px 6px 16px #b8b9be, inset -6px -6px 16px #ffffff;
 }
 
-.category-card p{ margin:0; color:var(--muted); font-size:15px; }
+.category-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  border-radius: 12px;
+  padding: 8px;
+  background: #e6e7ee;
+  margin-bottom: 10px;
+  box-shadow: inset 4px 4px 8px #b8b9be, inset -4px -4px 8px #ffffff;
+}
+
+.category-card p {
+  margin: 0;
+  font-size: 15px;
+  color: #333;
+  font-weight: 500;
+}

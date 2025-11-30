@@ -11,6 +11,9 @@ export default function Homepage() {
   const [tablets, setTablets] = useState([]);
   const [lighting, setLighting] = useState([]);
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("smartphones"); // dynamic category
+
   const goToChat = () => navigate("/chat");
   const goToProfile = () => navigate("/profile");
 
@@ -32,6 +35,13 @@ export default function Homepage() {
     fetchData("tablets", setTablets);
     fetchData("lighting", setLighting);
   }, []);
+
+  const handleSearch = () => {
+    if (!searchQuery.trim()) return;
+    // Navigate to selected category with search query
+    navigate(`/category/${selectedCategory}?q=${encodeURIComponent(searchQuery)}`);
+    setSearchQuery(""); // clear input
+  };
 
   const renderCategory = (title, routeCategory, products) => (
     <div className="category-section">
@@ -69,6 +79,29 @@ export default function Homepage() {
       </div>
 
       <h1>Welcome to SmartPick</h1>
+
+      {/* Search bar */}
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+
+        {/* Select category for search */}
+        <select
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          <option value="smartphones">Smartphones</option>
+          <option value="laptops">Laptops</option>
+          <option value="tablets">Tablets</option>
+          <option value="lighting">Lighting</option>
+        </select>
+
+        <button onClick={handleSearch}>Search</button>
+      </div>
 
       {renderCategory("Smartphones", "smartphones", smartphones)}
       {renderCategory("Laptops", "laptops", laptops)}
