@@ -1,49 +1,57 @@
-.category-page {
-  padding: 20px;
-  background-color: #121212;
-  min-height: 100vh;
-  color: #e0e0e0;
-  font-family: Arial, sans-serif;
-}
-
-.category-page h1 {
-  font-size: 28px;
-  margin-bottom: 25px;
-  text-align: center;
-  letter-spacing: 1px;
+:root{
+  --bg: #0f1620;
+  --panel: #12161c;
+  --accent: #7b61ff;
+  --muted: #c7d2da;
 }
 
 
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
+.category-page{
+  min-height:100vh;
+  padding:36px;
+  max-width:1200px;
+  margin:0 auto;
+  color: #eaf2ff;
+  background: transparent;
+  font-family: "Poppins", Inter, Arial, sans-serif;
+}
+
+.category-page h1{
+  font-size:26px;
+  text-align:center;
+  margin-bottom:18px;
+  color:#f0f6ff;
+  letter-spacing: .6px;
 }
 
 
-.category-card {
-  background: #1c1c1c;
-  border-radius: 10px;
-  padding: 10px;
-  text-align: center;
-  cursor: pointer;
-  transition: 0.25s ease;
+.category-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap:20px;
 }
 
-.category-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 0 12px rgba(108,92,231,0.4);
+
+.category-card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.14));
+  border-radius: 14px;
+  padding:12px;
+  text-align:center;
+  cursor:pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+  box-shadow: 8px 10px 24px rgba(0,0,0,0.6), -6px -6px 14px rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.02);
+}
+.category-card:hover{ transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.72), 0 0 26px rgba(123,97,255,0.06) }
+
+.category-card img{
+  width:100%;
+  height:160px;
+  object-fit:contain;
+  border-radius:10px;
+  padding:8px;
+  background: rgba(255,255,255,0.01);
+  margin-bottom:10px;
 }
 
-.category-card img {
-  width: 100%;
-  height: 150px;
-  object-fit: contain;
-  margin-bottom: 8px;
-}
-
-.category-card p {
-  font-size: 15px;
-  color: #ccc;
-  margin: 0;
-}
+.category-card p{ margin:0; color:var(--muted); font-size:15px; }
