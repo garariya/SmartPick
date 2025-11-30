@@ -5,6 +5,7 @@ import Chat from "./pages/Chat";
 import Homepage from "./pages/Homepage";
 import CategoryPage from "./pages/CategoryPage"
 import ProductPage from "./pages/ProductPage"
+import Profile from "./pages/Profile";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/homepage" element={<Homepage/>}/>
         <Route path="/product/:id" element={<ProductPage/>}/>
         <Route path="/category/:category" element={<CategoryPage/>}/>
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </BrowserRouter>
   );

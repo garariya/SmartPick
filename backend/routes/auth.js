@@ -94,6 +94,27 @@ router.post('/login', async (req, res) => {
   }
 });
 
+//logout route
+router.post("/logout", (req, res) => {
+  return res.json({ message: "Logged out" });
+});
+
+//delete route
+router.delete("/delete-account", authMiddleware, async (req, res) => {
+  try {
+    await prisma.user.delete({
+      where: { id: req.user.userId }
+    });
+
+    return res.json({ message: "Account deleted" });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+
 
 router.get('/me', authMiddleware,  async (req, res) => {
   try {

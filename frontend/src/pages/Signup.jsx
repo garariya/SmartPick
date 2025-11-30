@@ -32,7 +32,7 @@ export default function Signup() {
         localStorage.setItem('user', JSON.stringify(data.user));
         if (data.token) localStorage.setItem('token', data.token);
       
-        navigate('/hompage', { state: { userName: data.user.name } });
+        navigate('/homepage', { state: { userName: data.user.name } });
       }
        else {
         alert(data.message || 'Signup failed');

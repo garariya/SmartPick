@@ -11,10 +11,9 @@ export default function Homepage() {
   const [tablets, setTablets] = useState([]);
   const [lighting, setLighting] = useState([]);
 
-  // Navigate to chat page
   const goToChat = () => navigate("/chat");
+  const goToProfile = () => navigate("/profile");
 
-  // Fetch category API from backend
   const fetchData = async (category, setter) => {
     try {
       const res = await fetch(
@@ -34,12 +33,10 @@ export default function Homepage() {
     fetchData("lighting", setLighting);
   }, []);
 
-  // Renders each category section
   const renderCategory = (title, routeCategory, products) => (
     <div className="category-section">
       <div className="category-header">
         <h2>{title}</h2>
-
         <button
           className="see-all-btn"
           onClick={() => navigate(`/category/${routeCategory}`)}
@@ -65,10 +62,11 @@ export default function Homepage() {
 
   return (
     <div className="homepage-container">
-      {/* Ask AI Button */}
-      <button className="ask-ai-btn" onClick={goToChat}>
-        Ask AI
-      </button>
+      {/* Top Right Buttons */}
+      <div className="top-right-buttons">
+        <button className="ask-ai-btn" onClick={goToChat}>Ask AI</button>
+        <button className="profile-btn" onClick={goToProfile}>Profile</button>
+      </div>
 
       <h1>Welcome to SmartPick</h1>
 
