@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get("/:category", async (req, res) => {
   const { category } = req.params;
-  const { q, limit = 100 } = req.query; 
+  const {limit = 5 } = req.query; 
 
   try {
 
@@ -13,13 +13,6 @@ router.get("/:category", async (req, res) => {
     const data = await apiRes.json();
 
     let products = data.products || [];
-
-
-    if (q) {
-      products = products.filter((p) =>
-        p.title.toLowerCase().includes(q.toLowerCase())
-      );
-    }
 
 
     products = products.slice(0, limit);

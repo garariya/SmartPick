@@ -11,7 +11,7 @@ export default function CategoryPage() {
 
   useEffect(() => {
     const loadCategory = async () => {
-      const res = await fetch(`${REACT_APP_API_URL}/api/category/${category}?limit=100`);
+      const res = await fetch(`${REACT_APP_API_URL}/api/category/${category}`);
       const data = await res.json();
       setProducts(data.products);
     };

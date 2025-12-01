@@ -12,7 +12,8 @@ export default function Homepage() {
   const [lighting, setLighting] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("select"); // dynamic category
+  const [selectedCategory, setSelectedCategory] = useState("select");
+  const [filteredData, setFilteredData] = useState([])
 
   const goToChat = () => navigate("/chat");
   const goToProfile = () => navigate("/profile");
@@ -20,7 +21,7 @@ export default function Homepage() {
   const fetchData = async (category, setter) => {
     try {
       const res = await fetch(
-        `${REACT_APP_API_URL}/api/category/${category}?limit=100`
+        `${REACT_APP_API_URL}/api/category/${category}?limit=5`
       );
       const data = await res.json();
       setter(data.products || []);
@@ -36,12 +37,7 @@ export default function Homepage() {
     fetchData("lighting", setLighting);
   }, []);
 
-  const handleSearch = () => {
-    if (!searchQuery.trim()) return;
-    // Navigate to selected category with search query
-    navigate(`/category/${selectedCategory}?q=${encodeURIComponent(searchQuery)}`);
-    setSearchQuery(""); // clear input
-  };
+
 
   const renderCategory = (title, routeCategory, products) => (
     <div className="category-section">
@@ -88,6 +84,8 @@ export default function Homepage() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
+        {/* search button */}
+        <button>Search</button>
   
         <select
           value={selectedCategory}
@@ -100,8 +98,9 @@ export default function Homepage() {
           <option value="lighting">Lighting</option>
         </select>
   
-        <button onClick={handleSearch}>Search</button>
+        
       </div>
+      
   
       {/* CONDITIONAL CATEGORY RENDERING */}
       {selectedCategory === "select" && (
