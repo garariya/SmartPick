@@ -12,7 +12,7 @@ export default function Homepage() {
   const [lighting, setLighting] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("smartphones"); // dynamic category
+  const [selectedCategory, setSelectedCategory] = useState("select"); // dynamic category
 
   const goToChat = () => navigate("/chat");
   const goToProfile = () => navigate("/profile");
@@ -77,9 +77,9 @@ export default function Homepage() {
         <button className="ask-ai-btn" onClick={goToChat}>Ask AI</button>
         <button className="profile-btn" onClick={goToProfile}>Profile</button>
       </div>
-
+  
       <h1>Welcome to SmartPick</h1>
-
+  
       {/* Search bar */}
       <div className="search-bar">
         <input
@@ -88,25 +88,43 @@ export default function Homepage() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-
-        {/* Select category for search */}
+  
         <select
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
         >
+          <option value="select">Select</option>
           <option value="smartphones">Smartphones</option>
           <option value="laptops">Laptops</option>
           <option value="tablets">Tablets</option>
           <option value="lighting">Lighting</option>
         </select>
-
+  
         <button onClick={handleSearch}>Search</button>
       </div>
-
-      {renderCategory("Smartphones", "smartphones", smartphones)}
-      {renderCategory("Laptops", "laptops", laptops)}
-      {renderCategory("Tablets", "tablets", tablets)}
-      {renderCategory("Lighting", "lighting", lighting)}
+  
+      {/* CONDITIONAL CATEGORY RENDERING */}
+      {selectedCategory === "select" && (
+        <>
+          {renderCategory("Smartphones", "smartphones", smartphones)}
+          {renderCategory("Laptops", "laptops", laptops)}
+          {renderCategory("Tablets", "tablets", tablets)}
+          {renderCategory("Lighting", "lighting", lighting)}
+        </>
+      )}
+  
+      {selectedCategory === "smartphones" &&
+        renderCategory("Smartphones", "smartphones", smartphones)}
+  
+      {selectedCategory === "laptops" &&
+        renderCategory("Laptops", "laptops", laptops)}
+  
+      {selectedCategory === "tablets" &&
+        renderCategory("Tablets", "tablets", tablets)}
+  
+      {selectedCategory === "lighting" &&
+        renderCategory("Lighting", "lighting", lighting)}
     </div>
   );
+  
 }

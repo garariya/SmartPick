@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './Auth.css'; // Shared styles
+import './Auth.css';
 
 export default function Signup() {
   const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
@@ -28,7 +28,7 @@ export default function Signup() {
       console.log('Signup response:', data);
 
       if (res.ok) {
-        alert('🎉 Signup successful!');
+        alert(' Signup successful!');
         localStorage.setItem('user', JSON.stringify(data.user));
         if (data.token) localStorage.setItem('token', data.token);
       
@@ -48,7 +48,7 @@ export default function Signup() {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h2>Create Account ✨</h2>
+        <h2>Create Account</h2>
         <p className="subtitle">Join us and get started</p>
 
         <form onSubmit={handleSubmit}>
