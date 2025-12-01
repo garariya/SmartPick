@@ -4,19 +4,19 @@ import "./CategoryPage.css";
 
 export default function CategoryPage() {
   const { category } = useParams();
-  const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
   const navigate = useNavigate();
+  const API_URL = process.env.REACT_APP_API_URL;
 
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const loadCategory = async () => {
-      const res = await fetch(`${REACT_APP_API_URL}/api/category/${category}`);
+      const res = await fetch(`${API_URL}/api/category/${category}?limit=100`);
       const data = await res.json();
       setProducts(data.products);
     };
     loadCategory();
-  }, [category]);
+  }, [category, API_URL]);
 
   return (
     <div className="category-page">

@@ -1,26 +1,28 @@
 import express from "express";
-
 const router = express.Router();
-
 
 router.get("/:category", async (req, res) => {
   const { category } = req.params;
-  const {limit = 5 } = req.query; 
+  const limit = parseInt(req.query.limit) || 50;
 
   try {
-
-    const apiRes = await fetch(`https://dummyjson.com/products/category/${category}`);
+    // Fetch full dataset ONCE
+    const apiRes = await fetch("https://dummyjson.com/products?limit=200");
     const data = await apiRes.json();
-
     let products = data.products || [];
 
+    // Filter by category
+    products = products.filter(
+      (p) => p.category?.toLowerCase() === category.toLowerCase()
+    );
 
+    // Apply LIMIT
     products = products.slice(0, limit);
 
-    res.status(200).json({ products });
+    res.json({ products });
   } catch (error) {
-    console.error("Category error:", error);
-    res.status(500).json({ error: "Failed to fetch category" });
+    console.error("CATEGORY ERROR:", error);
+    res.status(500).json({ error: "Category failed" });
   }
 });
 
