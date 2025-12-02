@@ -39,7 +39,7 @@ export default function Homepage() {
       title: 'BMW Pencil',
       price: 99,
       description: "A luxury BMW-branded pencil",
-      category: "smartphones",
+      category: "stationary",
       rating: 4.9,
       stock: 50,
       images: ["https://example.com/pencil.jpg"]
