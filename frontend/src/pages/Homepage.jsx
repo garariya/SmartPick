@@ -58,6 +58,32 @@ export default function Homepage() {
     console.log("Add product response:", data);
   }
 
+  const handleUpdate = async() => {
+    const token = localStorage.getItem("token");
+
+    const updatedProduct = {
+      title: 'Updated BMW Pencil',
+      price: 79,
+      description: "An updated luxury BMW-branded pencil",
+      category: "stationary",
+      rating: 4.8,
+      stock: 60,
+      images: ["https://example.com/updated_pencil.jpg"]
+    }
+
+    const res = await fetch(`${REACT_APP_API_URL}/api/products/update/101`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(updatedProduct)
+    })
+
+    const data = await res.json();
+    console.log("Update product response:", data);
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return navigate("/");
@@ -151,7 +177,7 @@ export default function Homepage() {
       {user?.email === "johnwick@gmail.com" && (
         <div>
           <button onClick={handleAdd}>add product</button>
-          <button>update product</button>
+          <button onClick={handleUpdate}>update product</button>
           <button>delete product</button>
         </div>
       )}
