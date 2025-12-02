@@ -84,6 +84,21 @@ export default function Homepage() {
     console.log("Update product response:", data);
   }
 
+  const handleDelete = async() => {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch(`${REACT_APP_API_URL}/api/products/delete/101`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        "Authorization": `Bearer ${token}`
+      }
+    })
+
+    const data = await res.json();
+    console.log("Delete product response:", data);
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) return navigate("/");
@@ -178,7 +193,7 @@ export default function Homepage() {
         <div>
           <button onClick={handleAdd}>add product</button>
           <button onClick={handleUpdate}>update product</button>
-          <button>delete product</button>
+          <button onClick={handleDelete}>delete product</button>
         </div>
       )}
       
