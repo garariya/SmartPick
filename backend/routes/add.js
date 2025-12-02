@@ -7,8 +7,8 @@ const router = express.Router();
 router.post("/add", authMiddleware, async (req, res) => {
   try {
 
-    if (req.user.email !== "johnwick@gmail.com") {
-      return res.status(403).json({ message: "Access denied" });
+    if (req.user.email.trim().toLowerCase() !== "johnwick@gmail.com") {
+      return res.status(403).json({ message: "Access denied" , user: req.user});
     }
 
     const response = await fetch(`https://dummyjson.com/products/add`, {
