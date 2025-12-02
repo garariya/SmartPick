@@ -15,6 +15,8 @@ export default function Homepage() {
   const [selectedCategory, setSelectedCategory] = useState("select");
   const [filteredData, setFilteredData] = useState([])
 
+  const [user, setUser] = useState(null);
+
   const goToChat = () => navigate("/chat");
   const goToProfile = () => navigate("/profile");
 
@@ -30,6 +32,44 @@ export default function Homepage() {
     }
   };
 
+  const handleAdd = async() => {
+    const token = localStorage.getItem("token");
+    
+    const newProduct = {
+      title: 'BMW Pencil',
+      price: 99,
+      description: "A luxury BMW-branded pencil",
+      category: "smartphones",
+      rating: 4.9,
+      stock: 50,
+      images: ["https://example.com/pencil.jpg"]
+    }
+
+    const res = await fetch(`${REACT_APP_API_URL}/api/products/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(newProduct)
+    })
+    
+    const data = await res.json();
+    console.log("Add product response:", data);
+  }
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return navigate("/");
+
+    fetch(`${REACT_APP_API_URL}/api/auth/me`, {
+      headers: { Authorization: `Bearer ${token}` }
+    })
+      .then(res => res.json())
+      .then(data => setUser(data));
+  }, []);
+
+
   useEffect(() => {
     fetchData("smartphones", setSmartphones);
     fetchData("laptops", setLaptops);
@@ -39,32 +79,39 @@ export default function Homepage() {
 
 
 
-  const renderCategory = (title, routeCategory, products) => (
-    <div className="category-section">
-      <div className="category-header">
-        <h2>{title}</h2>
-        <button
-          className="see-all-btn"
-          onClick={() => navigate(`/category/${routeCategory}`)}
-        >
-          See All
-        </button>
-      </div>
-
-      <div className="product-row">
-        {products.map((p) => (
-          <div
-            key={p.id}
-            className="product-card"
-            onClick={() => navigate(`/product/${p.id}`)}
+  const renderCategory = (title, routeCategory, products) => {
+    const filteredData = products.filter((item) =>
+      item.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  
+    return (
+      <div className="category-section">
+        <div className="category-header">
+          <h2>{title}</h2>
+          <button
+            className="see-all-btn"
+            onClick={() => navigate(`/category/${routeCategory}`)}
           >
-            <img src={p.thumbnail} alt={p.title} />
-            <p>{p.title}</p>
-          </div>
-        ))}
+            See All
+          </button>
+        </div>
+  
+        <div className="product-row">
+          {filteredData.map((p) => (
+            <div
+              key={p.id}
+              className="product-card"
+              onClick={() => navigate(`/product/${p.id}`)}
+            >
+              <img src={p.thumbnail} alt={p.title} />
+              <p>{p.title}</p>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  };
+  
 
   return (
     <div className="homepage-container">
@@ -100,6 +147,14 @@ export default function Homepage() {
   
         
       </div>
+
+      {user?.email === "johnwick@gmail.com" && (
+        <div>
+          <button onClick={handleAdd}>add product</button>
+          <button>update product</button>
+          <button>delete product</button>
+        </div>
+      )}
       
   
       {/* CONDITIONAL CATEGORY RENDERING */}

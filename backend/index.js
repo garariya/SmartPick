@@ -5,22 +5,24 @@ import authRoutes from './routes/auth.js';
 import chatRoutes from './routes/chat.js';
 import homepage from './routes/category.js';
 import productRoutes from './routes/product.js';
+import add from './routes/add.js';
 
 dotenv.config();
 
 
-const app= express({
-  origin: '*', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-});
-app.use(cors());
+const app= express();
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api', chatRoutes);
 app.use('/api/category', homepage);
 app.use('/api/product', productRoutes);
+app.use('/api/products', add);
 
 
 app.get("/", (req,res)=> {

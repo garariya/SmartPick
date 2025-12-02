@@ -1,0 +1,29 @@
+import express from "express";
+import authMiddleware from "../middleware/authMiddleware.js";
+
+const router = express.Router();
+
+// Add a product (Admin Only)
+router.post("/add", authMiddleware, async (req, res) => {
+  try {
+
+    if (req.user.email !== "johnwick@gmail.com") {
+      return res.status(403).json({ message: "Access denied" });
+    }
+
+    const response = await fetch(`https://dummyjson.com/products/add`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(req.body)
+    });
+
+    const data = await response.json();
+    return res.status(200).json(data);
+
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ error: "Failed to add product" });
+  }
+});
+
+export default router;
