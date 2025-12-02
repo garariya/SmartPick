@@ -15,10 +15,12 @@ const authMiddleware = async(req, res, next) => {
 
   try {
 
-    const decoded =await jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
 
-    req.user =await decoded;
+    req.user = decoded;
+
+    console.log("decoded token",decoded);
 
 
     next();
