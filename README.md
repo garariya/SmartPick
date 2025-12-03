@@ -1,188 +1,102 @@
-⚪️ AI-Powered E-Commerce Platform
-Full-Stack MERN + Prisma + Gemini AI Chatbot
+Project Title
+Smart-pick: AI-Powered Electronic Product Comparison and Shopping Platform
 
-This project is a full-stack e-commerce platform built with React, Node.js, Express, Prisma, and Gemini AI.
-Users can browse categories, view products, manage their cart, authenticate securely, and chat with an AI chatbot that answers product-related questions.
+Project Overview
+This project aims to create a full-stack e-commerce web platform for electronic products that integrates Artificial Intelligence (AI) to help users make smarter purchase decisions.
+ The platform allows users to browse, search, filter, and purchase electronic items while also offering an AI-powered comparison system that evaluates multiple products based on their specifications, user reviews, and key performance metrics.
+The AI module provides natural-language insights that summarize which product is better suited for different user needs (e.g., performance, price, durability, or value).
 
-⚪️ Features
-⚪️ Frontend (React)
-
-Product Categories
-
-Product Detail Pages
-
-Cart Management (Context API)
-
-User Login / Signup
-
-AI Chatbot Interface
-
-Fully responsive UI
-
-⚪️ Backend (Node + Express + Prisma)
-
-JWT Authentication (Signup, Login, Logout, Delete Account)
-
-Prisma ORM with PostgreSQL / MySQL
-
-Product & Category APIs
-
-AI Chat Route Integrated with Gemini AI
-
-Secure Auth Middleware
-
-⚪️ AI Chatbot (Gemini)
-
-Uses Google’s Gemini 2.0 Flash model
-
-Maintains conversation history
-
-Specialized for answering product-related questions
-
-Clean role-based message formatting
-
-⚪️ Project Structure
-/backend
-  ├── routes/
-  │    ├── auth.js
-  │    ├── chat.js
-  │    ├── category.js
-  │    ├── product.js
-  │    └── add.js
-  ├── prisma/
-  │    └── schema.prisma
-  ├── middleware/
-  │    └── authMiddleware.js
-  ├── server.js
-  └── package.json
-
-/frontend
-  ├── src/
-  │    ├── pages/
-  │    ├── context/
-  │    ├── components/
-  │    ├── Chat.jsx
-  │    ├── App.js
-  │    └── index.js
-  ├── public/
-  └── package.json
-
-⚪️ Authentication Flow
-Signup
-POST /api/auth/signup
+Key Features
+Core Functionalities
+User Authentication and Profiles – Sign up, login, manage saved comparisons, and orders.✔️
 
 
-Hashes password with bcrypt
-
-Stores user via Prisma
-
-Returns JWT
-
-Login
-POST /api/auth/login
+Product Management (CRUD) – Admins can create, read, update, and delete products through a secure dashboard.✔️
 
 
-Validates credentials
-
-Returns JWT + user info
-
-Delete Account
-DELETE /api/auth/delete-account
+Search, Sort, Filter, Pagination – Users can easily navigate through products based on price, brand, or specifications.✔️
 
 
-Protected route
-
-Removes user using Prisma
-
-⚪️ AI Chat Route
-Backend: /api/chat
-router.post("/chat", async (req, res) => {
-  const model = ai.getGenerativeModel({ model: "gemini-2.0-flash" });
-
-  const history = req.body.history || [];
-  const userMessage = req.body.message;
-
-  // Allow only USER messages to be sent to Gemini
-  const filteredHistory = history.filter(h => h.role === "user");
-
-  const chat = model.startChat({
-    history: filteredHistory.map(h => ({
-      role: "user",
-      parts: h.parts
-    }))
-  });
-
-  const result = await chat.sendMessage(userMessage);
-  const text = await result.response.text();
-
-  res.json({ reply: text });
-});
-
-⚪️ Frontend Chat Component
-
-Chat.jsx sends history + message:
-
-const response = await fetch(`${REACT_APP_API_URL}/api/chat`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ history: chatHistory, message: value }),
-});
+Product Comparison (AI) – Users can select two or more items, and the system will generate an AI-driven comparison report highlighting strengths, weaknesses, and recommendations.✔️
 
 
-And stores:
+Dynamic Data Fetching – Product data is fetched dynamically using REST APIs for a smooth browsing experience.✔️
 
-setChatHistory(prev => [
-  ...prev,
-  { role: "user", parts: [{ text: value }] },
-  { role: "model", parts: [{ text: data.reply }] }
-]);
 
-⚪️ Environment Variables
-Backend (.env)
-DATABASE_URL=your_db_url
-JWT_SECRET=your_secret_key
-GEMINI_API_KEY=your_gemini_key
-PORT=5001
+Cart & Checkout System – Basic cart functionality with mock order placement to simulate a real shopping flow.
 
-Frontend (.env)
-REACT_APP_API_URL=http://localhost:5001
 
-🏁 Running the Project
-Install dependencies
-cd backend && npm install
-cd frontend && npm install
 
-Start Backend
-npm start
+AI Integration Details
+The platform integrates an AI comparison engine using an API (such as OpenAI or a fine-tuned model).
 
-Start Frontend
-npm start
 
-⚪️ Deployment Notes
+The backend extracts key product specs (like RAM, CPU, display, battery life, and price) and feeds them into an AI prompt.
+
+
+The AI model returns a human-like comparison summary explaining:
+
+
+Which product performs better overall.
+
+
+Which one offers better value for money.
+
+
+Who the ideal user is for each product (e.g., student, gamer, professional).
+
+
+Example output:
+“Laptop A delivers superior performance and battery life, making it ideal for professionals. However, Laptop B offers better portability and value for students.”
+
+Tech Stack
+Layer
+Technology
 Frontend
-
-Deploy on Vercel / Netlify
-
+React.js , React Router
 Backend
+Node.js, Express.js
+Database
+MongoDB / MySQL
+AI Integration
+OpenAI API (or Hugging Face model for comparisons)
+Authentication
+JWT or Firebase Auth
+Styling
+Tailwind CSS / Inline  CSS
+Version Control
+Git & GitHub
 
-Deploy on:
 
-Render
+Architecture
+Client (Frontend) → interacts with → Server (Express APIs) → queries → Database
+ For AI comparisons:
+ Client → API Route → AI Service → Returns Insights to Client
 
-Railway
+Expected Outcomes
+A fully functional multi-page full-stack web app with database-backed CRUD, search, filter, and pagination.
 
-Vercel Serverless Functions
 
-AWS / GCP / Azure
+A real-world demonstration of AI applied in e-commerce decision-making.
 
-⚪️ Future Improvements
 
-Product search with AI
+A scalable architecture suitable for portfolio or resume showcasing both full-stack and AI integration skills.
 
-Product recommendations
 
-Vector embeddings for semantic queries
 
-Admin dashboard
+Future Enhancements
+Integrate real-time price tracking from e-commerce APIs (like Amazon or Flipkart).
 
-Order management
+
+Add AI-based product recommendation system.
+
+
+Implement voice-based product search using NLP.
+
+
+Add review sentiment analysis to highlight common user opinions.
+
+
+
+
+
