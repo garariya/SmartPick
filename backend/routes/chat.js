@@ -12,24 +12,20 @@ router.post("/chat", async (req, res) => {
   const userMessage = req.body.message;
 
   try {
-    // Inject a SYSTEM instruction as the FIRST message but using "user" role (Gemini requirement)
     const systemInstruction = {
       role: "user",
       parts: [
         {
           text: `
-You are an electronics product expert chatbot.
+Your job:
+1. You ONLY answer questions related to ELECTRONIC PRODUCTS.
+2. If user asks anything outside electronics, reply:
+   "Please ask only electronic-product-related questions."
 
-RULES:
-1. You must answer ONLY electronics-product-related questions (mobiles, laptops, appliances, etc).
-2. If the question is NOT related to electronics, respond ONLY with:
-   {
-     "error": "Please ask only electronics-related questions."
-   }
-3. ALWAYS respond in the following JSON structure:
+3. ALWAYS respond in EXACTLY this JSON structure:
 
 {
-  "answer": "Main response here",
+  "answer": "... your natural-language answer about electronics ...",
   "product_details": {
     "category": "",
     "features": [],
@@ -38,10 +34,10 @@ RULES:
   }
 }
 
-4. NEVER include anything outside the JSON.
-5. KEEP RESPONSES CLEAR AND CONCISE.
-
-Follow these rules STRICTLY.
+Rules:
+- Do NOT include markdown.
+- Do NOT add extra fields.
+- Always return VALID JSON only.
 `
         }
       ]
