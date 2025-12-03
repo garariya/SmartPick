@@ -45,11 +45,6 @@
   margin-right: auto;
 }
 
-.model-message p {
-  white-space: pre-wrap;
-}
-
-
 .input-bar {
   display: flex;
   gap: 12px;
