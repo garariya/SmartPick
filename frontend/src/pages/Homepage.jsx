@@ -190,9 +190,9 @@ export default function Homepage() {
 
       {user?.email === "johnwick@gmail.com" && (
         <div>
-          <button onClick={handleAdd}>add product</button>
-          <button onClick={handleUpdate}>update product</button>
-          <button onClick={handleDelete}>delete product</button>
+          <button onClick={handleAdd} className="admin-button">add product</button>
+          <button onClick={handleUpdate} className="admin-button">update product</button>
+          <button onClick={handleDelete} className="admin-button">delete product</button>
         </div>
       )}
       
