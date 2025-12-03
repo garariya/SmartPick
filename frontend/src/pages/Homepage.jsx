@@ -19,6 +19,7 @@ export default function Homepage() {
 
   const goToChat = () => navigate("/chat");
   const goToProfile = () => navigate("/profile");
+  const goToCart = () => navigate("/cart");
 
   const fetchData = async (category, setter) => {
     try {
@@ -156,15 +157,16 @@ export default function Homepage() {
 
   return (
     <div className="homepage-container">
-      {/* Top Right Buttons */}
+
       <div className="top-right-buttons">
         <button className="ask-ai-btn" onClick={goToChat}>Ask AI</button>
         <button className="profile-btn" onClick={goToProfile}>Profile</button>
+        <button className="cart-button" onClick={goToCart}>Go to cart</button>
       </div>
   
       <h1>Welcome to SmartPick</h1>
   
-      {/* Search bar */}
+
       <div className="search-bar">
         <input
           type="text"
@@ -197,7 +199,7 @@ export default function Homepage() {
       )}
       
   
-      {/* CONDITIONAL CATEGORY RENDERING */}
+
       {selectedCategory === "select" && (
         <>
           {renderCategory("Smartphones", "smartphones", smartphones)}

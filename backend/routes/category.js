@@ -16,7 +16,7 @@ router.get("/:category", async (req, res) => {
       (p) => p.category?.toLowerCase() === category.toLowerCase()
     );
 
-    // Apply LIMIT
+
     products = products.slice(0, limit);
 
     res.json({ products });

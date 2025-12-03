@@ -102,3 +102,33 @@
     padding: 20px;
   }
 }
+
+
+.product-reviews {
+  margin-top: 40px;
+  padding: 24px;
+  background: var(--panel);
+  border-radius: 20px;
+  box-shadow: 6px 6px 12px #b8b9be, -6px -6px 12px #ffffff;
+}
+
+.product-reviews h2 {
+  margin-bottom: 18px;
+}
+
+.review-card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 14px;
+  box-shadow: 4px 4px 8px #c5c6ca, -4px -4px 8px #ffffff;
+}
+
+.review-card h4 {
+  margin: 0 0 4px 0;
+}
+
+.review-card span {
+  color: #f7c400;
+  font-weight: bold;
+}
