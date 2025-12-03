@@ -172,8 +172,7 @@ export default function Homepage() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        {/* search button */}
-        <button>Search</button>
+
   
         <select
           value={selectedCategory}
